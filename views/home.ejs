@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Briefify - A playful platform, making information brief</title>
+    <link rel="icon" href="/logo2.png" type="image/icon type">
+    <script
+        src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp,container-queries"></script>
+</head>
+
+<body>
+    <div id="google_translate_element"></div>
+    <div class="flex justify-center items-center w-full h-screen bg-slate-100">
+
+
+        <div class="text-center w-full space-y-3 p-4">
+
+            <h2 class="text-red-800 text-3xl font-bold">What can I help with?</h2>
+
+            <!-- Form to support file upload -->
+            <form action="/chat" method="POST" enctype="multipart/form-data" class="space-y-2">
+                <div class="flex justify-between mb-6 shadow bg-white text-gray-800 md:w-1/2 mx-auto rounded-full">
+
+                    <!-- Input for the prompt text -->
+                    <input type="text" name="prompt" placeholder="Enter the prompt" autocomplete="off"
+                        class="rounded-full bg-white w-full ml-3 border-0 outline-none focus:outline-none focus:ring-0 focus:border-0">
+
+                    <!-- Submit button with icon -->
+                    <button type="submit"
+                        class="py-1 px-3 m-1 font-semibold bg-gray-300 hover:bg-gray-200 hover:border-gray-400 border transition duration-300 ease-in-out  text-white rounded-full">
+                        <img src="/images/send-icon.png" alt="Send" class="w-5 text-white">
+                    </button>
+                </div>
+
+                <!-- Hidden file input for PDF -->
+                <input type="file" name="document" accept="application/pdf" class="hidden" id="file-upload">
+
+                <!-- Box to display the selected file name -->
+
+                <div>
+                    <div class="flex border border-gray-500 w-fit mx-auto rounded-md ">
+                        <div class="border-r text-sm py-1 border-gray-500 px-2">URI</div>
+                        <input type="text" name="url"
+                            class="py-0 border-0 text-gray-800 text-sm outline-none focus:outline-none rounded-md focus:ring-0 focus:border-0">
+                    </div>
+                    <p class="text-xs text-gray-700"> ( docx, pptx, xlsx, pdf, ods, odp, odt )</p>
+                </div>
+
+                <p class="text-xs text-gray-700">OR</p>
+                <div id="fileBox" class="hidden p-3 border border-gray-300 rounded-md shadow-sm bg-white w-fit mx-auto">
+                    <p id="fileName" class="text-gray-700"></p>
+                </div>
+
+                <!-- Label to trigger file upload -->
+                <label for="file-upload"
+                    class="py-1.5 px-5 border bg-white shadow hover:bg-gray-100 text-neutral-600 rounded-2xl cursor-pointer mx-auto flex items-center w-fit">
+                    <img src="/images/pdf-icon2.png" alt="pdf" class="w-5 h-auto">
+                    <div class="pl-3 text-start">
+                        <h4 class="text-xs font-medium "> Upload file ( PDF )</h4>
+                        <h4 class="text-xs -mt-0.5"> Max size - 20MB</h4>
+                    </div>
+                </label>
+
+            </form>
+
+        </div>
+
+    </div>
+    <div>
+
+    </div>
+
+
+<!-- 
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element');
+        }
+    </script>
+
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+ -->
+
+    <script>
+        // Reference to the input file and file box elements
+        const fileInput = document.getElementById('file-upload');
+        const fileName = document.getElementById('fileName');
+        const fileBox = document.getElementById('fileBox');
+
+        fileInput.addEventListener('change', function () {
+            const file = fileInput.files[0]; // Get the selected file
+            if (file) {
+                // Show the file name in the box
+                fileName.textContent = `Selected file: ${file.name}`;
+                fileBox.style.display = 'block'; // Make the box visible
+            } else {
+                fileName.textContent = '';
+                fileBox.style.display = 'none'; // Hide the box if no file is selected
+            }
+        });
+    </script>
+</body>
+
+</html>
